@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ~/.aws/credentials:/root/.aws/credentials # Mount local AWS CLI credentials
+      - .:/opt/app:cached # Mount entire project folder
+      - /opt/app/node_modules/ # Ignore node_modules folder
+      - /opt/app/.serverless/ # Ignore serverless folder
+      - /opt/app/lib/ # Ignore lib folder
+    ports:
+      - "8000:8000"
